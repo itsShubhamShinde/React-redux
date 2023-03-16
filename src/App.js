@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Components/Header';
+import { Routes, Route } from 'react-router-dom'
+import Home from './Components/Home';
+import Contact from './Components/Contact';
+import Services from './Components/Services';
+import { createContext } from "react";
+import { useState } from "react";
+export const GlobalData = createContext();
 
 function App() {
+  const [theam, setTheam] = useState(false);
   return (
+    <GlobalData.Provider value={{ theam: theam, setTheam: setTheam }}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Header/> 
+     <Routes>
+      <Route path="/" element={<Home/>}></Route>
+      <Route path="/Contact" element={<Contact/>}></Route>
+      <Route path="/Services" element={<Services/>}></Route>
+     </Routes>
     </div>
+    </GlobalData.Provider >
   );
 }
 
